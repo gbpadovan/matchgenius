@@ -11,6 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^1.2.11",
     "@ai-sdk/openai": "^0.0.60",
     "@opentelemetry/api": "^1.7.0",
     "@radix-ui/react-alert-dialog": "^1.1.2",

@@ -36,6 +36,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 
 import type { Document, Suggestion, Vote } from '@/lib/supabase/types';
 
+export type BlockKind = 'text' | 'code' | 'image';
+
 export interface UIBlock {
   title: string;
   documentId: string;

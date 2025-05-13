@@ -1,4 +1,8 @@
-// Define your models here.
+import { anthropic } from '@ai-sdk/anthropic';
+import { openai } from '@ai-sdk/openai';
+import { experimental_wrapLanguageModel as wrapLanguageModel } from 'ai';
+
+import { customMiddleware } from './custom-middleware';
 
 export interface Model {
   id: string;
@@ -7,19 +11,25 @@ export interface Model {
   description: string;
 }
 
+export const DEFAULT_MODEL_NAME: string = 'claude-haiku';
+
 export const models: Array<Model> = [
   {
-    id: 'gpt-4o-mini',
-    label: 'GPT 4o mini',
-    apiIdentifier: 'gpt-4o-mini',
-    description: 'Small model for fast, lightweight tasks',
+    id: 'claude-haiku',
+    label: 'Claude Haiku',
+    apiIdentifier: 'claude-3-haiku-20240307',
+    description: 'Fast and efficient model for everyday tasks',
   },
   {
-    id: 'gpt-4o',
-    label: 'GPT 4o',
-    apiIdentifier: 'gpt-4o',
-    description: 'For complex, multi-step tasks',
+    id: 'claude-sonnet',
+    label: 'Claude Sonnet',
+    apiIdentifier: 'claude-3-sonnet-20240229',
+    description: 'Advanced model for complex tasks and longer context',
   },
-] as const;
-
-export const DEFAULT_MODEL_NAME: string = 'gpt-4o-mini';
+  {
+    id: 'claude-opus',
+    label: 'Claude Opus',
+    apiIdentifier: 'claude-3-opus-20240229',
+    description: 'Most powerful Claude model for complex reasoning',
+  },
+];

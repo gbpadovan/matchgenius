@@ -27,7 +27,10 @@ export function useBlockStream({
     if (optimisticSuggestions && optimisticSuggestions.length > 0) {
       const [optimisticSuggestion] = optimisticSuggestions;
       const url = `/api/suggestions?documentId=${optimisticSuggestion.document_id}`;
-      mutate(url, optimisticSuggestions, false);
+      // Only mutate if we have a valid document_id to prevent infinite loops
+      if (optimisticSuggestion.document_id) {
+        mutate(url, optimisticSuggestions, false);
+      }
     }
   }, [optimisticSuggestions, mutate]);
 
@@ -65,12 +68,14 @@ export function useBlockStream({
           };
 
         case 'suggestion':
-          setTimeout(() => {
+          // Only update suggestions if it's a valid suggestion with a document_id
+          const suggestion = delta.content as Suggestion;
+          if (suggestion && suggestion.document_id) {
             setOptimisticSuggestions((currentSuggestions) => [
               ...currentSuggestions,
-              delta.content as Suggestion,
+              suggestion,
             ]);
-          }, 0);
+          }
 
           return draftBlock;
 
