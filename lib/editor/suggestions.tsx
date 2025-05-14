@@ -3,7 +3,7 @@ import { PluginKey, Plugin } from 'prosemirror-state';
 import { Decoration, DecorationSet, EditorView } from 'prosemirror-view';
 import { createRoot } from 'react-dom/client';
 
-import { Suggestion as PreviewSuggestion } from '@/components/custom/suggestion';
+import { InlineSuggestion } from '@/components/custom/suggestion';
 import { Suggestion } from '@/lib/supabase/types';
 
 export interface UISuggestion extends Suggestion {
@@ -107,7 +107,7 @@ export function createSuggestionWidget(
     dispatch(textTransaction);
   };
 
-  root.render(<PreviewSuggestion suggestion={suggestion} onApply={onApply} />);
+  root.render(<InlineSuggestion suggestion={suggestion} onApply={onApply} />);
 
   return {
     dom,

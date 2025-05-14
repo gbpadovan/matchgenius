@@ -8,8 +8,10 @@ import { UISuggestion } from '@/lib/editor/suggestions';
 
 import { CrossIcon, MessageIcon } from './icons';
 import { Button } from '../ui/button';
+import { Card } from '../ui/card';
 
-export const Suggestion = ({
+// Inline suggestion component for editor
+export const InlineSuggestion = ({
   suggestion,
   onApply,
 }: {
@@ -66,5 +68,28 @@ export const Suggestion = ({
         </motion.div>
       )}
     </AnimatePresence>
+  );
+};
+
+// Welcome screen suggestion card component
+export const Suggestion = ({
+  title,
+  description,
+  onClick,
+}: {
+  title: string;
+  description: string;
+  onClick?: () => void;
+}) => {
+  return (
+    <Card 
+      className="p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+      onClick={onClick}
+    >
+      <div className="text-left">
+        <h4 className="text-sm font-medium">{title}</h4>
+        <p className="text-xs text-muted-foreground">{description}</p>
+      </div>
+    </Card>
   );
 };
